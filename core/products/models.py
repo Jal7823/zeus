@@ -31,7 +31,7 @@ class Product(models.Model):
     name = models.CharField('Nombre', max_length=100)
     description = models.TextField('Descripción')
     price = models.FloatField('Precio', default=0)
-    image = models.ImageField('Imagen', blank=True, upload_to='products')
+    image = models.ImageField('Imagen', blank=True, upload_to='products',null=True)
     stock = models.IntegerField('Stock', default=0)
     categories = models.ManyToManyField(Categorie, blank=True,related_name='Categorias')
     gender = models.ForeignKey(Gender, on_delete=models.CASCADE)
@@ -39,7 +39,7 @@ class Product(models.Model):
     updated = models.DateTimeField('Modificado', auto_now=True)
 
     def __str__(self):
-        return f'{self.name} / precio:{self.price} /stock :{self.stock} '
+        return f'{self.name} ${self.price} -> stock :{self.stock} '
 
     class Meta:
         db_table = 'Product'
